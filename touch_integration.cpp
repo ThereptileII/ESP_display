@@ -89,8 +89,21 @@ lv_indev_t* touch_init_and_register(void) {
   lv_indev_drv_init(&drv);
   drv.type = LV_INDEV_TYPE_POINTER;
   drv.read_cb = indev_read_cb;
+#if LV_VERSION_CHECK(8, 3, 0)
   drv.read_period = 15;
+#endif
   s_indev = lv_indev_drv_register(&drv);
+
+#if !LV_VERSION_CHECK(8, 3, 0)
+  lv_disp_t *disp = lv_disp_get_default();
+  if (!disp) disp = lv_disp_get_next(nullptr);
+  if (disp) {
+    lv_timer_t *read_timer = lv_indev_get_read_timer(disp);
+    if (read_timer) {
+      lv_timer_set_period(read_timer, 15);
+    }
+  }
+#endif
 
   Serial.println("[touch] GSL3680 initialized and LVGL v8 indev registered.");
   return s_indev;
