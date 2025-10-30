@@ -15,7 +15,16 @@ static inline lv_timer_t *lvgl_indev_get_timer(lv_indev_t *indev,
 
 static inline lv_timer_t *lvgl_indev_get_timer(lv_indev_t *indev,
                                                lv_timer_t *(*fn)(lv_disp_t *)) {
+#if LV_VERSION_CHECK(8, 3, 0)
   lv_disp_t *disp = lv_indev_get_disp(indev);
+#else
+  /*
+   * lv_indev_get_disp() was added in LVGL 8.3.  Older 8.x releases only expose
+   * lv_disp_get_default(), so fall back to that to keep compatibility with the
+   * Arduino Library Manager builds that ship LVGL 8.2.
+   */
+  lv_disp_t *disp = lv_disp_get_default();
+#endif
   return disp ? fn(disp) : nullptr;
 }
 
