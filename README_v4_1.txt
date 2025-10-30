@@ -1,5 +1,6 @@
 MarineDashboard P4 v4.1 (ESP32-P4 + JD9365 @ 800x1280, LVGL v8)
-- LVGL v8 API fixed (uses lv_tick_inc / lv_indev_set_read_period)
+- LVGL v8 API fixed (uses lv_tick_inc / legacy indev timer fallback by default;
+  enable LVGL_USE_INDEV_SET_READ_PERIOD=1 if your LVGL build provides the helper)
 - Fonts compiled as separate C units (no #include .c)
 - Landscape + touch mapping + stripe/bounce flush
 
