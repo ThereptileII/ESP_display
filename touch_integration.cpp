@@ -1,6 +1,7 @@
 // touch_integration.cpp — LVGL v8 ONLY
 #include "touch_integration.h"
 #include "lvgl_v8_guard.h"  // <— add this line
+#include "lvgl_indev_compat.h"
 #include "config.h"
 #include <Arduino.h>
 
@@ -94,16 +95,7 @@ lv_indev_t* touch_init_and_register(void) {
 #endif
   s_indev = lv_indev_drv_register(&drv);
 
-#if !LV_VERSION_CHECK(8, 3, 0)
-  lv_disp_t *disp = lv_disp_get_default();
-  if (!disp) disp = lv_disp_get_next(nullptr);
-  if (disp) {
-    lv_timer_t *read_timer = lv_indev_get_read_timer(disp);
-    if (read_timer) {
-      lv_timer_set_period(read_timer, 15);
-    }
-  }
-#endif
+  lvgl_set_indev_read_period(s_indev, 15);
 
   Serial.println("[touch] GSL3680 initialized and LVGL v8 indev registered.");
   return s_indev;
