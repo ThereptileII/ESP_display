@@ -21,7 +21,7 @@
  *----------------*/
 
 /*Store the image of the glyphs*/
-static LV_ATTRIBUTE_LARGE_CONST const uint8_t glyph_bitmap[] = {
+static LV_ATTRIBUTE_LARGE_CONST const uint8_t orbitron_32_800_glyph_bitmap[] = {
     /* U+0020 " " */
 
     /* U+0021 "!" */
@@ -1401,7 +1401,7 @@ static LV_ATTRIBUTE_LARGE_CONST const uint8_t glyph_bitmap[] = {
  *  GLYPH DESCRIPTION
  *--------------------*/
 
-static const lv_font_fmt_txt_glyph_dsc_t glyph_dsc[] = {
+static const lv_font_fmt_txt_glyph_dsc_t orbitron_32_800_glyph_dsc[] = {
     {.bitmap_index = 0, .adv_w = 0, .box_w = 0, .box_h = 0, .ofs_x = 0, .ofs_y = 0} /* id = 0 reserved */,
     {.bitmap_index = 0, .adv_w = 161, .box_w = 0, .box_h = 0, .ofs_x = 0, .ofs_y = 0},
     {.bitmap_index = 0, .adv_w = 113, .box_w = 6, .box_h = 24, .ofs_x = 1, .ofs_y = 0},
@@ -1518,13 +1518,13 @@ static const lv_font_fmt_txt_glyph_dsc_t glyph_dsc[] = {
  *  CHARACTER MAPPING
  *--------------------*/
 
-static const uint16_t unicode_list_2[] = {
+static const uint16_t orbitron_32_800_unicode_list_2[] = {
     0x0, 0x1, 0x5, 0x14, 0x15, 0x26, 0x27, 0x34,
     0x35, 0x46, 0x47, 0x20e0, 0x20e1, 0x20e2, 0x20e3
 };
 
 /*Collect the unicode lists and glyph_id offsets*/
-static const lv_font_fmt_txt_cmap_t cmaps[] =
+static const lv_font_fmt_txt_cmap_t orbitron_32_800_cmaps[] =
 {
     {
         .range_start = 32, .range_length = 62, .glyph_id_start = 1,
@@ -1536,7 +1536,7 @@ static const lv_font_fmt_txt_cmap_t cmaps[] =
     },
     {
         .range_start = 176, .range_length = 8420, .glyph_id_start = 95,
-        .unicode_list = unicode_list_2, .glyph_id_ofs_list = NULL, .list_length = 15, .type = LV_FONT_FMT_TXT_CMAP_SPARSE_TINY
+        .unicode_list = orbitron_32_800_unicode_list_2, .glyph_id_ofs_list = NULL, .list_length = 15, .type = LV_FONT_FMT_TXT_CMAP_SPARSE_TINY
     }
 };
 
@@ -1546,7 +1546,7 @@ static const lv_font_fmt_txt_cmap_t cmaps[] =
 
 
 /*Pair left and right glyphs for kerning*/
-static const uint8_t kern_pair_glyph_ids[] =
+static const uint8_t orbitron_32_800_kern_pair_glyph_ids[] =
 {
     9, 53,
     34, 56,
@@ -1902,7 +1902,7 @@ static const uint8_t kern_pair_glyph_ids[] =
 
 /* Kerning between the respective left and right glyphs
  * 4.4 format which needs to scaled with `kern_scale`*/
-static const int8_t kern_pair_values[] =
+static const int8_t orbitron_32_800_kern_pair_values[] =
 {
     5, -19, -10, -30, -20, -5, -5, -9,
     -18, -13, -14, -5, -10, -10, -10, -101,
@@ -1951,10 +1951,10 @@ static const int8_t kern_pair_values[] =
 };
 
 /*Collect the kern pair's data in one place*/
-static const lv_font_fmt_txt_kern_pair_t kern_pairs =
+static const lv_font_fmt_txt_kern_pair_t orbitron_32_800_kern_pairs =
 {
-    .glyph_ids = kern_pair_glyph_ids,
-    .values = kern_pair_values,
+    .glyph_ids = orbitron_32_800_kern_pair_glyph_ids,
+    .values = orbitron_32_800_kern_pair_values,
     .pair_cnt = 350,
     .glyph_ids_size = 0
 };
@@ -1969,14 +1969,14 @@ static  lv_font_fmt_txt_glyph_cache_t cache;
 #endif
 
 #if LVGL_VERSION_MAJOR >= 8
-static const lv_font_fmt_txt_dsc_t font_dsc = {
+static const lv_font_fmt_txt_dsc_t orbitron_32_800_font_dsc = {
 #else
-static lv_font_fmt_txt_dsc_t font_dsc = {
+static lv_font_fmt_txt_dsc_t orbitron_32_800_font_dsc = {
 #endif
-    .glyph_bitmap = glyph_bitmap,
-    .glyph_dsc = glyph_dsc,
-    .cmaps = cmaps,
-    .kern_dsc = &kern_pairs,
+    .glyph_bitmap = orbitron_32_800_glyph_bitmap,
+    .glyph_dsc = orbitron_32_800_glyph_dsc,
+    .cmaps = orbitron_32_800_cmaps,
+    .kern_dsc = &orbitron_32_800_kern_pairs,
     .kern_scale = 16,
     .cmap_num = 3,
     .bpp = 4,
@@ -2010,7 +2010,7 @@ lv_font_t orbitron_32_800 = {
     .underline_position = -3,
     .underline_thickness = 2,
 #endif
-    .dsc = &font_dsc,          /*The custom font data. Will be accessed by `get_glyph_bitmap/dsc` */
+    .dsc = &orbitron_32_800_font_dsc,          /*The custom font data. Will be accessed by `get_glyph_bitmap/dsc` */
 #if LV_VERSION_CHECK(8, 2, 0) || LVGL_VERSION_MAJOR >= 9
     .fallback = NULL,
 #endif
