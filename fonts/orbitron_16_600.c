@@ -1,4 +1,4 @@
-﻿/*******************************************************************************
+/*******************************************************************************
  * Size: 16 px
  * Bpp: 4
  * Opts: --format lvgl --bpp 4 --size 16 --lv-font-name orbitron_16_600 --font .\static\Orbitron-SemiBold.ttf -r 0x20-0x7E -r 0x00C5 -r 0x00C4 -r 0x00D6 -r 0x00E5 -r 0x00E4 -r 0x00F6 --font C:\Windows\Fonts\seguisym.ttf -r 0x00B0 -r 0x00B1 -r 0x00B5 -r 0x00D7 -r 0x00F7 -r 0x2190-0x2193 -o .\fonts\orbitron_16_600.c
@@ -21,7 +21,7 @@
  *----------------*/
 
 /*Store the image of the glyphs*/
-static LV_ATTRIBUTE_LARGE_CONST const uint8_t glyph_bitmap[] = {
+static LV_ATTRIBUTE_LARGE_CONST const uint8_t orbitron_16_600_glyph_bitmap[] = {
     /* U+0020 " " */
 
     /* U+0021 "!" */
@@ -715,7 +715,7 @@ static LV_ATTRIBUTE_LARGE_CONST const uint8_t glyph_bitmap[] = {
  *  GLYPH DESCRIPTION
  *--------------------*/
 
-static const lv_font_fmt_txt_glyph_dsc_t glyph_dsc[] = {
+static const lv_font_fmt_txt_glyph_dsc_t orbitron_16_600_glyph_dsc[] = {
     {.bitmap_index = 0, .adv_w = 0, .box_w = 0, .box_h = 0, .ofs_x = 0, .ofs_y = 0} /* id = 0 reserved */,
     {.bitmap_index = 0, .adv_w = 76, .box_w = 0, .box_h = 0, .ofs_x = 0, .ofs_y = 0},
     {.bitmap_index = 0, .adv_w = 56, .box_w = 3, .box_h = 11, .ofs_x = 0, .ofs_y = 0},
@@ -832,13 +832,13 @@ static const lv_font_fmt_txt_glyph_dsc_t glyph_dsc[] = {
  *  CHARACTER MAPPING
  *--------------------*/
 
-static const uint16_t unicode_list_2[] = {
+static const uint16_t orbitron_16_600_unicode_list_2[] = {
     0x0, 0x1, 0x5, 0x14, 0x15, 0x26, 0x27, 0x34,
     0x35, 0x46, 0x47, 0x20e0, 0x20e1, 0x20e2, 0x20e3
 };
 
 /*Collect the unicode lists and glyph_id offsets*/
-static const lv_font_fmt_txt_cmap_t cmaps[] =
+static const lv_font_fmt_txt_cmap_t orbitron_16_600_cmaps[] =
 {
     {
         .range_start = 32, .range_length = 62, .glyph_id_start = 1,
@@ -850,7 +850,7 @@ static const lv_font_fmt_txt_cmap_t cmaps[] =
     },
     {
         .range_start = 176, .range_length = 8420, .glyph_id_start = 95,
-        .unicode_list = unicode_list_2, .glyph_id_ofs_list = NULL, .list_length = 15, .type = LV_FONT_FMT_TXT_CMAP_SPARSE_TINY
+        .unicode_list = orbitron_16_600_unicode_list_2, .glyph_id_ofs_list = NULL, .list_length = 15, .type = LV_FONT_FMT_TXT_CMAP_SPARSE_TINY
     }
 };
 
@@ -860,7 +860,7 @@ static const lv_font_fmt_txt_cmap_t cmaps[] =
 
 
 /*Pair left and right glyphs for kerning*/
-static const uint8_t kern_pair_glyph_ids[] =
+static const uint8_t orbitron_16_600_kern_pair_glyph_ids[] =
 {
     9, 53,
     34, 56,
@@ -1215,7 +1215,7 @@ static const uint8_t kern_pair_glyph_ids[] =
 
 /* Kerning between the respective left and right glyphs
  * 4.4 format which needs to scaled with `kern_scale`*/
-static const int8_t kern_pair_values[] =
+static const int8_t orbitron_16_600_kern_pair_values[] =
 {
     1, -9, -4, -14, -9, -1, -1, -3,
     -8, -4, -7, -1, -6, -6, -16, -55,
@@ -1264,10 +1264,10 @@ static const int8_t kern_pair_values[] =
 };
 
 /*Collect the kern pair's data in one place*/
-static const lv_font_fmt_txt_kern_pair_t kern_pairs =
+static const lv_font_fmt_txt_kern_pair_t orbitron_16_600_kern_pairs =
 {
-    .glyph_ids = kern_pair_glyph_ids,
-    .values = kern_pair_values,
+    .glyph_ids = orbitron_16_600_kern_pair_glyph_ids,
+    .values = orbitron_16_600_kern_pair_values,
     .pair_cnt = 349,
     .glyph_ids_size = 0
 };
@@ -1282,14 +1282,14 @@ static  lv_font_fmt_txt_glyph_cache_t cache;
 #endif
 
 #if LVGL_VERSION_MAJOR >= 8
-static const lv_font_fmt_txt_dsc_t font_dsc = {
+static const lv_font_fmt_txt_dsc_t orbitron_16_600_font_dsc = {
 #else
-static lv_font_fmt_txt_dsc_t font_dsc = {
+static lv_font_fmt_txt_dsc_t orbitron_16_600_font_dsc = {
 #endif
-    .glyph_bitmap = glyph_bitmap,
-    .glyph_dsc = glyph_dsc,
-    .cmaps = cmaps,
-    .kern_dsc = &kern_pairs,
+    .glyph_bitmap = orbitron_16_600_glyph_bitmap,
+    .glyph_dsc = orbitron_16_600_glyph_dsc,
+    .cmaps = orbitron_16_600_cmaps,
+    .kern_dsc = &orbitron_16_600_kern_pairs,
     .kern_scale = 16,
     .cmap_num = 3,
     .bpp = 4,
@@ -1323,7 +1323,7 @@ lv_font_t orbitron_16_600 = {
     .underline_position = -2,
     .underline_thickness = 1,
 #endif
-    .dsc = &font_dsc,          /*The custom font data. Will be accessed by `get_glyph_bitmap/dsc` */
+    .dsc = &orbitron_16_600_font_dsc,          /*The custom font data. Will be accessed by `get_glyph_bitmap/dsc` */
 #if LV_VERSION_CHECK(8, 2, 0) || LVGL_VERSION_MAJOR >= 9
     .fallback = NULL,
 #endif
