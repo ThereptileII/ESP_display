@@ -91,8 +91,13 @@ lv_indev_t* touch_init_and_register(void) {
   drv.read_cb = indev_read_cb;
   s_indev = lv_indev_drv_register(&drv);
 
-  // LVGL v8 API
-  lv_indev_set_read_period(s_indev, 15);
+  // LVGL v8 API (fall back to timer accessor if helper is disabled in config)
+#if !defined(LV_USE_TIMER) || LV_USE_TIMER
+  lv_timer_t *read_timer = lv_indev_get_read_timer(s_indev);
+  if (read_timer) {
+    lv_timer_set_period(read_timer, 15);
+  }
+#endif
 
   Serial.println("[touch] GSL3680 initialized and LVGL v8 indev registered.");
   return s_indev;

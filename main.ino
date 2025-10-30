@@ -1,6 +1,7 @@
 // main.ino  — LVGL v8 ONLY
 #include <Arduino.h>
 #include <lvgl.h>
+#include "lvgl_v8_guard.h"
 #include "config.h"
 #include "display_driver.h"
 #include "ui.h"
@@ -89,7 +90,9 @@ void loop() {
   uint32_t dt  = now - last;
   if (dt >= 12) {
     last = now;
-    lv_tick_inc(dt);      // LVGL 8 API
+#if !defined(LV_TICK_CUSTOM) || (LV_TICK_CUSTOM == 0)
+    lv_tick_inc(dt);      // LVGL 8 API when using the built-in tick
+#endif
     lv_timer_handler();   // LVGL 8 API
   } else {
     delay(1);
