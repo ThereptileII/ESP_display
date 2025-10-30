@@ -2,6 +2,12 @@
 
 #include "lvgl_v8_guard.h"
 
+#if LV_VERSION_CHECK(8, 3, 0)
+#ifndef LVGL_HAS_INDEV_GET_DISP
+#define LVGL_HAS_INDEV_GET_DISP 1
+#endif
+#endif
+
 #ifdef __cplusplus
 /*
  * Some vendor LVGL forks changed lv_indev_get_read_timer() to take an lv_disp_t
@@ -16,7 +22,21 @@ static inline lv_timer_t *lvgl_indev_get_timer(lv_indev_t *indev,
 static inline lv_timer_t *lvgl_indev_get_timer(lv_indev_t *indev,
                                                lv_timer_t *(*fn)(lv_disp_t *)) {
 #if LV_VERSION_CHECK(8, 3, 0)
+#if defined(LVGL_HAS_INDEV_GET_DISP)
+#if LVGL_HAS_INDEV_GET_DISP
   lv_disp_t *disp = lv_indev_get_disp(indev);
+#else
+  lv_disp_t *disp = lv_disp_get_default();
+#endif
+#else
+  /*
+   * Some vendor LVGL forks report themselves as 8.3+ yet omit
+   * lv_indev_get_disp() from the public headers.  Allow projects to opt out of
+   * the newer helper without patching our sources by defining
+   * LVGL_HAS_INDEV_GET_DISP to 0 before including this header.
+   */
+  lv_disp_t *disp = lv_disp_get_default();
+#endif
 #else
   /*
    * lv_indev_get_disp() was added in LVGL 8.3.  Older 8.x releases only expose
