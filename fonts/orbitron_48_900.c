@@ -1,4 +1,4 @@
-﻿/*******************************************************************************
+/*******************************************************************************
  * Size: 48 px
  * Bpp: 4
  * Opts: --format lvgl --bpp 4 --size 48 --lv-font-name orbitron_48_900 --font .\static\Orbitron-Black.ttf -r 0x20-0x7E -r 0x00C5 -r 0x00C4 -r 0x00D6 -r 0x00E5 -r 0x00E4 -r 0x00F6 --font C:\Windows\Fonts\seguisym.ttf -r 0x00B0 -r 0x00B1 -r 0x00B5 -r 0x00D7 -r 0x00F7 -r 0x2190-0x2193 -o .\fonts\orbitron_48_900.c
