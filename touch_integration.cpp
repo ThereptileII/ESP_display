@@ -89,19 +89,28 @@ lv_indev_t* touch_init_and_register(void) {
   lv_indev_drv_init(&drv);
   drv.type = LV_INDEV_TYPE_POINTER;
   drv.read_cb = indev_read_cb;
+  drv.read_period = 15;  // ensure a responsive polling cadence on all LVGL versions
   s_indev = lv_indev_drv_register(&drv);
 
   // LVGL v8 API (fall back to timer accessor if helper is disabled in config)
 #if !defined(LV_USE_TIMER) || LV_USE_TIMER
-  lv_disp_t *disp = lv_disp_get_default();
+  lv_timer_t *read_timer = nullptr;
+#if defined(LV_VERSION_CHECK) && LV_VERSION_CHECK(8, 3, 0)
+  lv_disp_t *disp = lv_indev_get_disp(s_indev);
+  if (!disp) {
+    disp = lv_disp_get_default();
+  }
   if (!disp) {
     disp = lv_disp_get_next(NULL);
   }
   if (disp) {
-    lv_timer_t *read_timer = lv_indev_get_read_timer(disp);
-    if (read_timer) {
-      lv_timer_set_period(read_timer, 15);
-    }
+    read_timer = lv_indev_get_read_timer(disp);
+  }
+#else
+  read_timer = lv_indev_get_read_timer(s_indev);
+#endif
+  if (read_timer) {
+    lv_timer_set_period(read_timer, 15);
   }
 #endif
 
