@@ -89,10 +89,11 @@ lv_indev_t* touch_init_and_register(void) {
   lv_indev_drv_init(&drv);
   drv.type = LV_INDEV_TYPE_POINTER;
   drv.read_cb = indev_read_cb;
-#if LV_VERSION_CHECK(8, 3, 0)
-  drv.read_period = 15;
-#endif
   s_indev = lv_indev_drv_register(&drv);
+
+#if LV_VERSION_CHECK(8, 3, 0)
+  lv_indev_set_read_period(s_indev, 15);
+#endif
 
 #if !LV_VERSION_CHECK(8, 3, 0)
   lv_disp_t *disp = lv_disp_get_default();
