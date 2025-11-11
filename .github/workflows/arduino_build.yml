@@ -17,6 +17,7 @@ jobs:
             - name: esp32:esp32
               source-url: https://dl.espressif.com/dl/package_esp32_index.json
           libraries: |
-            - name: Servo
+            - name: lvgl
+              version: "8.3.11"
           sketch-paths: |
-            - sketch
+            - .
