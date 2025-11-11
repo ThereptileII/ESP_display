@@ -1,6 +1,6 @@
 name: Build Arduino Sketch
 
-on: push
+on: merge
 
 jobs:
   build:
