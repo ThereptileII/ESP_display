@@ -12,7 +12,7 @@ jobs:
 
       - uses: arduino/compile-sketches@v1
         with:
-          fqbn: "espressif:esp32:esp32p4"
+          fqbn: "esp32:esp32:esp32p4"
           platforms: |
             - name: esp32:esp32
               source-url: https://dl.espressif.com/dl/package_esp32_index.json
